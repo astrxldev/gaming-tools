@@ -105,7 +105,7 @@ export function ArtifactSubstatsControl({
 
             <input
               key={value}
-              type="text"
+              type="number"
               defaultValue={(() => {
                 const base = SUBSTAT_BASE_VALUES[rarity]?.[type];
                 if (base && value > 0) {
