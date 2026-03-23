@@ -131,7 +131,7 @@ export class Weapon extends Ascendable implements IWeapon, Clonable<Weapon> {
     value?: IWeapon[T]
   ): this {
     const data = typeof infoOrKey === "object" ? infoOrKey : { [infoOrKey]: value };
-    const keys: (keyof IWeapon)[] = [
+    const keys: (keyof IWeaponBasic)[] = [
       "ID",
       "code",
       "type",
@@ -139,7 +139,6 @@ export class Weapon extends Ascendable implements IWeapon, Clonable<Weapon> {
       "refi",
       "owner",
       "setupIDs",
-      "data",
     ];
 
     return Object_.safeAssign(this, data, keys) as this;

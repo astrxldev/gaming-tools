@@ -15,11 +15,11 @@ import type {
 import { createArtifact, CreateArtifactParams, createTarget } from "@/logic/entity.logic";
 import { createWeaponBuffCtrls } from "@/logic/modifier.logic";
 import { ArtifactGear, Team, UpdatableKey } from "@/models";
+import { $AppWeapon } from "@/services";
 import { useSettingsStore } from "@Store/settings";
 import { useCalcStore } from "../calculatorStore";
-import { onActiveSetup } from "../utils";
 import { selectSetup } from "../selectors";
-import { $AppWeapon } from "@/services";
+import { onActiveSetup } from "../utils";
 
 // ===== CHARACTER =====
 
@@ -57,13 +57,12 @@ export const updateMainWeapon = (data: Partial<IWeapon>) => {
     onActiveSetup((setup) => {
       const { main } = setup;
       const oldWeaponCode = main.weapon.code;
+      const newWeaponCode = data.code;
 
       main.weapon = main.weapon.clone().update(data);
 
-      if (main.weapon.code !== oldWeaponCode) {
-        if (!data.data) {
-          main.weapon.data = $AppWeapon.get(main.weapon.code)!;
-        }
+      if (newWeaponCode && newWeaponCode !== oldWeaponCode) {
+        main.weapon.data = $AppWeapon.get(newWeaponCode)!;
         setup.wpBuffCtrls = createWeaponBuffCtrls(main.weapon.data, true);
       }
     })
