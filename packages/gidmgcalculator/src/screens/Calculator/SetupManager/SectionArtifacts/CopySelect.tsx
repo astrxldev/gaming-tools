@@ -11,11 +11,11 @@ type Option = {
 };
 
 export function CopySelect() {
-  const { setupManagers, setupsById } = useShallowCalcStore((state) =>
+  const { setupManagers, setupsById } = useShallowCalcStore((state: any) =>
     Object_.extract(state, ["setupManagers", "setupsById"])
   );
 
-  const copyOptions = setupManagers.reduce<Option[]>((results, manager) => {
+  const copyOptions = setupManagers.reduce((results: Option[], manager: any) => {
     const { pieces } = setupsById[manager.ID].main.atfGear;
 
     if (Array.from(pieces).length) {
@@ -33,7 +33,7 @@ export function CopySelect() {
       <CopySection
         className="mb-4 px-4"
         options={copyOptions}
-        onClickCopy={({ value }) => copyArtifacts(value)}
+        onClickCopy={({ value }: Option) => copyArtifacts(value)}
       />
     )
   );

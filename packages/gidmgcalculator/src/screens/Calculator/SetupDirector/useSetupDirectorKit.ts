@@ -29,7 +29,7 @@ export function useSetupDirectorKit() {
   );
 
   const [tempSetups, setTempSetups] = useState<MultiSetupChange[]>(
-    setupManagers.map((manager) => ({
+    setupManagers.map((manager: any) => ({
       ...manager,
       status: "OLD",
       isCompared: comparedIds.includes(manager.ID),

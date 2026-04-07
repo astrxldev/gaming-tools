@@ -11,11 +11,11 @@ type Option = {
 };
 
 export function CopySelect() {
-  const { setupManagers, setupsById } = useShallowCalcStore((state) =>
+  const { setupManagers, setupsById } = useShallowCalcStore((state: any) =>
     Object_.extract(state, ["setupManagers", "setupsById"])
   );
 
-  const copyOptions = setupManagers.reduce<Option[]>((results, manager) => {
+  const copyOptions = setupManagers.reduce((results: Option[], manager: any) => {
     const { teammates } = setupsById[manager.ID];
 
     if (teammates.length) {
@@ -33,7 +33,7 @@ export function CopySelect() {
       <CopySection
         className="mt-3 mb-1 px-4"
         options={copyOptions}
-        onClickCopy={({ value }) => copyTeammates(value)}
+        onClickCopy={({ value }: Option) => copyTeammates(value)}
       />
     )
   );

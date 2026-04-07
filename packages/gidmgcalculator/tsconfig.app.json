@@ -26,7 +26,8 @@
     "paths": {
       "@Store/*": ["src/store/*"],
       "@/*": ["src/*"],
-      "@UnitTest/*": ["unit-test/*"]
+      "@UnitTest/*": ["unit-test/*"],
+      "ron-utils": ["../ron-utils/src/main.ts"]
     }
   },
   "include": ["src", "unit-test"]

@@ -23,7 +23,7 @@ export function SetupSelect() {
   const id = useId();
   const calcModalCtrl = useCalcModalCtrl();
 
-  const { activeId, setupManagers, standardId, comparedIds } = useShallowCalcStore((state) =>
+  const { activeId, setupManagers, standardId, comparedIds } = useShallowCalcStore((state: any) =>
     Object_.extract(state, ["activeId", "setupManagers", "standardId", "comparedIds"])
   );
 
@@ -54,7 +54,7 @@ export function SetupSelect() {
   const handleToggleCompared = (ID: number) => () => {
     let newStandardId = standardId;
     const newComparedIds = comparedIds.includes(ID)
-      ? comparedIds.filter((id) => id !== ID)
+      ? comparedIds.filter((id: any) => id !== ID)
       : comparedIds.concat(ID);
 
     if (newComparedIds.length === 0) {
@@ -87,11 +87,11 @@ export function SetupSelect() {
       <ComplexSelect
         selectId={id}
         value={Array_.findById(setupManagers, activeId)?.ID}
-        options={setupManagers.map((setup, i) => {
+        options={setupManagers.map((setup: any, i: number) => {
           return {
             label: setup.name,
             value: setup.ID,
-            renderActions: ({ closeSelect }) => {
+            renderActions: ({ closeSelect }: any) => {
               const actions: ActionButtonAttrs[] = [
                 {
                   className: "hover:bg-danger-1 hover:text-light-1",

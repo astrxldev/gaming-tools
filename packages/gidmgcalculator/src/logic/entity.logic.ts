@@ -76,6 +76,19 @@ export function createWeapon(
   return new Weapon({ ID, type, code }, data, { state, relation });
 }
 
+export const createWeaponBasic = (
+  params: PartiallyRequiredOnly<RawWeapon, "type">
+): RawWeapon => {
+  const { type, code = Weapon.DEFAULT_CODE[type] } = params;
+  return {
+    ID: Date.now(),
+    code,
+    level: "1/20",
+    refi: 1,
+    ...params,
+  };
+};
+
 // ========== ITEMS ==========
 
 export function isWeapon(item: RawWeapon | RawArtifact): item is RawWeapon {
@@ -106,6 +119,20 @@ export function createCharacter(
     state,
   });
 }
+
+export const createCharacterBasic = (
+  params: PartiallyRequiredOnly<RawCharacter, "code">
+): RawCharacter => {
+  return {
+    level: "1/20",
+    NAs: 1,
+    ES: 1,
+    EB: 1,
+    cons: 0,
+    enhanced: false,
+    ...params,
+  };
+};
 
 // ========== TARGET ==========
 

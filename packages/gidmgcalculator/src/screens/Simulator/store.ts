@@ -1,10 +1,10 @@
-import { CharacterCalc, Team } from "@/models";
+import { Character, Team } from "@/models";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 type SimulatorState = {
   team: Team;
-  members: CharacterCalc[];
+  members: Character[];
 };
 
 const initialState: SimulatorState = {
