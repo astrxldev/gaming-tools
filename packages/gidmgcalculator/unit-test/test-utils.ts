@@ -78,7 +78,7 @@ export function __findAscensionByLevel(level: Level) {
 }
 
 export function __genWeaponInfo(code: __EMockWeapon = __EMockWeapon.SWORD) {
-  const weapon: IWeaponBasic = {
+  const weapon: RawWeapon = {
     code: code,
     type: "sword",
     ID: 1,
