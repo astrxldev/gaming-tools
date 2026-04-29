@@ -1,9 +1,22 @@
 import type { BonusSpec } from "./bonus-spec";
 import type { PenaltySpec } from "./penalty-spec";
 
-export type ModAffectType = "SELF" | "TEAMMATE" | "SELF_TEAMMATE" | "PARTY" | "ONE_UNIT" | "ACTIVE_UNIT";
+export type ModAffectType =
+  | "SELF"
+  | "TEAMMATE"
+  | "PARTY"
+  | "ONE_UNIT" // "ACTIVE_PERSIST"
+  | "ACTIVE_UNIT"; // "ACTIVE_FIELD"
 
-export type ModInputType = "LEVEL" | "TEXT" | "CHECK" | "STACKS" | "SELECT" | "ANEMOABLE" | "DENDROABLE" | "ELEMENTAL";
+export type ModInputType =
+  | "LEVEL"
+  | "TEXT"
+  | "CHECK"
+  | "STACKS"
+  | "SELECT"
+  | "ANEMOABLE"
+  | "DENDROABLE"
+  | "ELEMENTAL";
 
 export type ModInputSpec = {
   label?: string;

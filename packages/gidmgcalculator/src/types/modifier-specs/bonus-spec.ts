@@ -13,8 +13,13 @@ import type {
 import type { EffectMaxSpec } from "./effect-max-spec";
 import type { EffectStackSpec, EnergyCostStackSpec, StacksBonusSpec } from "./effect-stack-spec";
 import type { EffectValueSpec } from "./effect-value-spec";
+import type { ModAffectType } from "./modifier-specs";
 
 export type ExtraBonusSpec = EffectPerformableConditionSpecs & BonusCoreSpec;
+
+export type BonusOutsourceSpec = {
+  stacks?: EnergyCostStackSpec;
+};
 
 export type BonusCoreSpec = {
   id?: string;
@@ -42,9 +47,7 @@ export type BonusCoreSpec = {
   stacksBonus?: StacksBonusSpec | StacksBonusSpec[];
   /** Added after max */
   extras?: number | ExtraBonusSpec | ExtraBonusSpec[];
-  outsource?: {
-    stacks?: EnergyCostStackSpec;
-  };
+  outsource?: BonusOutsourceSpec;
 };
 
 export type AttributeTargetPath =
@@ -71,8 +74,11 @@ type TalentLevelTargetSpec = {
   path: LevelableTalentType;
 };
 
+export type BonusTargetSpec = AttributeTargetSpec | AttackBonusTargetSpec | TalentLevelTargetSpec;
+
 export type BonusSpec = EffectPerformableConditionSpecs &
   EffectReceiverConditionSpecs &
   BonusCoreSpec & {
-    targets: AttributeTargetSpec | AttackBonusTargetSpec | TalentLevelTargetSpec;
+    affect?: ModAffectType;
+    targets: BonusTargetSpec;
   };
