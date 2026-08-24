@@ -46,14 +46,27 @@ if ! git show-ref --verify --quiet "refs/remotes/$upstream_remote/$branch"; then
 fi
 
 if [[ "$current_branch" != "$branch" ]]; then
+  target_ref="$upstream_remote/$branch"
+
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    target_ref="$branch"
+  elif git show-ref --verify --quiet "refs/remotes/$origin_remote/$branch"; then
+    target_ref="$origin_remote/$branch"
+  fi
+
+  if ! git cat-file -e "$target_ref:scripts/sync-upstream.sh" 2>/dev/null; then
+    echo "Error: '$branch' does not contain the custom feature layer." >&2
+    echo "No branch switch was performed, so your custom files remain available." >&2
+    echo "Migrate the custom commits to '$branch' before using it as a sync target." >&2
+    exit 1
+  fi
+
   if git show-ref --verify --quiet "refs/heads/$branch"; then
     git switch "$branch"
   elif git show-ref --verify --quiet "refs/remotes/$origin_remote/$branch"; then
     git switch --track -c "$branch" "$origin_remote/$branch"
   else
     git switch -c "$branch" "$upstream_remote/$branch"
-    echo "Created '$branch' from $upstream_remote/$branch."
-    echo "This new branch does not include custom commits from '$current_branch'."
   fi
 fi
 
