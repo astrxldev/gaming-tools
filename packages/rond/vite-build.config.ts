@@ -30,7 +30,7 @@ export default defineConfig({
     cssCodeSplit: true,
     copyPublicDir: false,
     rollupOptions: {
-      external: ["react", "react/jsx-runtime"],
+      external: ["react", "react/jsx-runtime", "react-dom", "react-dom/client"],
       output: {
         entryFileNames: "[name].js",
         assetFileNames: (assetInfo) => {
